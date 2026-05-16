@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" role="img" aria-labelledby="title desc">
+  <title id="title">plotloop refined wordmark comparison</title>
+  <desc id="desc">Comparison between v04 and v05 refined plotloop wordmarks.</desc>
+  <rect width="1100" height="520" fill="#F8F5EF"/>
+  <g font-family="Inter, Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#000000">
+    <text x="72" y="66" font-size="18" font-weight="700">v04 baseline</text>
+    <text x="72" y="286" font-size="18" font-weight="700">v05 refined</text>
+  </g>
+  <image href="logo-wordmark-04-refined-gap.svg" x="70" y="64" width="960" height="220"/>
+  <image href="logo-wordmark-05-refined-gap.svg" x="85" y="284" width="930" height="220"/>
+</svg>

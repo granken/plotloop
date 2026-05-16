@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 708 240" width="100%" height="100%">
+  <g fill="#000000">
+    <!-- p -->
+    <rect x="20" y="64" width="18" height="156" rx="9" />
+    <circle cx="66" cy="110" r="37" stroke="#000000" stroke-width="18" fill="none" />
+
+    <!-- l -->
+    <rect x="134" y="0" width="18" height="156" rx="9" />
+
+    <!-- o -->
+    <circle cx="220" cy="110" r="37" stroke="#000000" stroke-width="18" fill="none" />
+
+    <!-- t -->
+    <rect x="288" y="36" width="18" height="120" rx="9" />
+    <rect x="280" y="64" width="42" height="18" rx="9" />
+
+    <!-- l -->
+    <rect x="328" y="0" width="18" height="156" rx="9" />
+
+    <!-- o -->
+    <circle cx="414" cy="110" r="37" stroke="#000000" stroke-width="18" fill="none" />
+
+    <!-- broken o (带有完美圆润端点的弧线缺口) -->
+    <path d="M 493.8 124 A 37 37 0 1 0 493.8 96" stroke="#000000" stroke-width="18" stroke-linecap="round" fill="none" />
+
+    <!-- p -->
+    <rect x="596" y="64" width="18" height="156" rx="9" />
+    <circle cx="642" cy="110" r="37" stroke="#000000" stroke-width="18" fill="none" />
+  </g>
+</svg>

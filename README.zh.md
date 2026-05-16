@@ -1,8 +1,11 @@
-# plotloop
+<p align="center">
+  <img src="./assets/logo.svg" alt="plotloop" width="575">
+</p>
 
-> **设计 loop，改变你进化的方式。**
->
-> *Plot your loop. One loop to rule them all.*
+<p align="center">
+  <strong>设计 loop，改变你进化的方式。</strong><br>
+  <em>Plot your loop.</em>
+</p>
 
 一个围绕 **Agent、Skill、脚本与方法论** 的工坊——用来重写"我们工作的方式"。围绕三个信念展开：
 
@@ -68,11 +71,6 @@ cp .env.example .env       # 填入 MIMO_COOKIE
 ## 灵感来源
 
 - **Boris Cherny** 关于 Agentic Loop 的演讲（给我正在做的事命了名）
-- **黑客帝国** — "I'm trying to free your mind, Neo."
-- **指环王** — *One loop to rule them all.*
-- **硅谷的 Pied Piper** — middle-out，但带着旋律
-- **老友记的 PIVOT！** — 这其实就是全部主题
-- **塞尔达的 Shrine** — 每个 skill 就是一座独立的小神庙
 
 完整 running list 见 [`docs/inspirations/`](./docs/inspirations)。
 

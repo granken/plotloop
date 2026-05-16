@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">plotloop panda tilt mascot mark</title>
+  <desc id="desc">A simple black and white panda dog head with long ears and a curious tilted look, intended as a mascot sticker rather than the primary logo.</desc>
+  <rect width="256" height="256" rx="56" fill="#F6F1E7"/>
+  <g transform="rotate(-8 128 128)">
+    <path d="M68 76c-22 20-29 56-16 88 14 34 44 54 76 54s62-20 76-54c13-32 6-68-16-88-16-15-38-23-60-23s-44 8-60 23z" fill="#FFFFFF" stroke="#080A0F" stroke-width="10" stroke-linejoin="round"/>
+    <path d="M58 82c-17-30-18-50-6-59 14-10 38 12 50 43z" fill="#080A0F"/>
+    <path d="M198 82c17-30 18-50 6-59-14-10-38 12-50 43z" fill="#080A0F"/>
+    <path d="M82 122c7-20 29-27 43-14 6 6 7 18 2 27-9 16-35 15-45-13z" fill="#080A0F"/>
+    <path d="M174 122c-7-20-29-27-43-14-6 6-7 18-2 27 9 16 35 15 45-13z" fill="#080A0F"/>
+    <circle cx="109" cy="124" r="5" fill="#FFFFFF"/>
+    <circle cx="147" cy="124" r="5" fill="#FFFFFF"/>
+    <path d="M128 139c8 0 13 4 13 9s-5 9-13 9-13-4-13-9 5-9 13-9z" fill="#080A0F"/>
+    <path d="M114 169c9 8 19 10 28 0" fill="none" stroke="#080A0F" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>

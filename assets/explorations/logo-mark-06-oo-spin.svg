@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">plotloop mark 06 - oo spin</title>
+  <desc id="desc">Two linked o loops with a subtle orbit line suggesting a running loop.</desc>
+  <rect width="256" height="256" rx="56" fill="#080A0F"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="92" cy="128" r="46" stroke="#F6F1E7" stroke-width="18"/>
+    <circle cx="164" cy="128" r="46" stroke="#F6F1E7" stroke-width="18"/>
+    <path d="M120 128h16" stroke="#18D7FF" stroke-width="18"/>
+    <ellipse cx="164" cy="128" rx="35" ry="17" transform="rotate(-24 164 128)" stroke="#C8A24A" stroke-width="8"/>
+  </g>
+  <circle cx="164" cy="128" r="7" fill="#C8A24A"/>
+</svg>

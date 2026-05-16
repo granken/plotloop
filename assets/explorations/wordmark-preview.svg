@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 560" role="img" aria-labelledby="title desc">
+  <title id="title">plotloop wordmark preview</title>
+  <desc id="desc">Preview sheet for minimal plotloop wordmark and double-o mark variants.</desc>
+  <rect width="1160" height="560" fill="#F6F1E7"/>
+  <g font-family="Inter, Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#080A0F">
+    <text x="48" y="62" font-size="28" font-weight="760">plotloop wordmark explorations</text>
+    <text x="48" y="92" font-size="15" opacity="0.66">Decision frame: wordmark first, double-o as the smallest durable loop motif.</text>
+  </g>
+
+  <g transform="translate(48 132)">
+    <rect width="500" height="148" rx="18" fill="#FFFFFF" stroke="#E1D9CA"/>
+    <image href="logo-wordmark-01-plain.svg" x="22" y="14" width="456" height="108"/>
+    <text x="250" y="126" text-anchor="middle" font-family="Inter, Geist, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="#080A0F">01 Plain Wordmark</text>
+  </g>
+
+  <g transform="translate(612 132)">
+    <rect width="500" height="148" rx="18" fill="#FFFFFF" stroke="#E1D9CA"/>
+    <image href="logo-wordmark-02-pivot.svg" x="22" y="14" width="456" height="108"/>
+    <text x="250" y="126" text-anchor="middle" font-family="Inter, Geist, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="#080A0F">02 Pivot Wordmark</text>
+  </g>
+
+  <g transform="translate(48 334)">
+    <rect width="244" height="176" rx="18" fill="#FFFFFF" stroke="#E1D9CA"/>
+    <image href="logo-mark-05-oo-pivot.svg" x="76" y="24" width="92" height="92"/>
+    <text x="122" y="144" text-anchor="middle" font-family="Inter, Geist, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="#080A0F">05 OO Pivot</text>
+  </g>
+
+  <g transform="translate(340 334)">
+    <rect width="244" height="176" rx="18" fill="#FFFFFF" stroke="#E1D9CA"/>
+    <image href="logo-mark-06-oo-spin.svg" x="76" y="24" width="92" height="92"/>
+    <text x="122" y="144" text-anchor="middle" font-family="Inter, Geist, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="#080A0F">06 OO Spin</text>
+  </g>
+
+  <g transform="translate(664 350)" font-family="Inter, Geist, ui-sans-serif, system-ui, sans-serif" fill="#080A0F">
+    <text x="0" y="0" font-size="18" font-weight="760">Recommended read</text>
+    <text x="0" y="34" font-size="15" opacity="0.72">Use 02 as the main wordmark if the gold dot still feels calm.</text>
+    <text x="0" y="62" font-size="15" opacity="0.72">Use 05 as the favicon / GitHub avatar.</text>
+    <text x="0" y="90" font-size="15" opacity="0.72">Keep 06 for motion, loading, or hero accents.</text>
+  </g>
+</svg>

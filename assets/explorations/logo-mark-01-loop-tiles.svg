@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">plotloop mark 01 - loop tiles</title>
+  <desc id="desc">Four plot tiles connected by a circular loop with a central control point.</desc>
+  <defs>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#080A0F" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <circle cx="128" cy="128" r="84" fill="none" stroke="#1E4FFF" stroke-width="18" stroke-linecap="round" stroke-dasharray="410 80" transform="rotate(-38 128 128)"/>
+  <circle cx="128" cy="128" r="26" fill="#F6F1E7" stroke="#080A0F" stroke-width="8"/>
+  <circle cx="128" cy="128" r="8" fill="#C8A24A"/>
+
+  <g filter="url(#softShadow)" stroke="#080A0F" stroke-width="8" stroke-linejoin="round">
+    <rect x="100" y="26" width="56" height="56" rx="10" fill="#F6F1E7"/>
+    <rect x="174" y="100" width="56" height="56" rx="10" fill="#F6F1E7"/>
+    <rect x="100" y="174" width="56" height="56" rx="10" fill="#F6F1E7"/>
+    <rect x="26" y="100" width="56" height="56" rx="10" fill="#F6F1E7"/>
+  </g>
+
+  <g fill="none" stroke="#18D7FF" stroke-width="5" stroke-linecap="round">
+    <path d="M121 54h14"/>
+    <path d="M202 121v14"/>
+    <path d="M135 202h-14"/>
+    <path d="M54 135v-14"/>
+  </g>
+</svg>

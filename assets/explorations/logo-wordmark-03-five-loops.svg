@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" role="img" aria-labelledby="title desc">
+  <title id="title">plotloop wordmark 03 - five loops</title>
+  <desc id="desc">A minimal monoline plotloop wordmark using the five natural loop counters in p, o, o, o, and p.</desc>
+  <rect width="720" height="220" fill="none"/>
+  <g fill="none" stroke="#080A0F" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+    <!-- p -->
+    <path d="M72 88v86"/>
+    <circle cx="102" cy="92" r="30"/>
+
+    <!-- l -->
+    <path d="M156 48v88"/>
+
+    <!-- o -->
+    <circle cx="218" cy="104" r="32"/>
+
+    <!-- t -->
+    <path d="M282 58v78"/>
+    <path d="M258 86h50"/>
+
+    <!-- l -->
+    <path d="M354 48v88"/>
+
+    <!-- o -->
+    <circle cx="416" cy="104" r="32"/>
+
+    <!-- o with the only pivot gap -->
+    <path d="M508 75a32 32 0 1 0 22 29"/>
+
+    <!-- p -->
+    <path d="M576 88v86"/>
+    <circle cx="606" cy="92" r="30"/>
+  </g>
+</svg>

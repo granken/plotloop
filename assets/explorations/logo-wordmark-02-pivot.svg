@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 180" role="img" aria-labelledby="title desc">
+  <title id="title">plotloop wordmark 02 - pivot</title>
+  <desc id="desc">A minimal lowercase plotloop wordmark with a broken double-o pivot mark.</desc>
+  <rect width="760" height="180" fill="none"/>
+  <g fill="#080A0F" font-family="Inter, Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="760" font-size="88" letter-spacing="-1">
+    <text x="56" y="116">plotl</text>
+    <text x="442" y="116">p</text>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M330 56a32 32 0 1 0 25 52" stroke="#080A0F" stroke-width="13"/>
+    <path d="M390 120a32 32 0 1 0-25-52" stroke="#080A0F" stroke-width="13"/>
+    <path d="M350 88h28" stroke="#1E4FFF" stroke-width="13"/>
+  </g>
+  <circle cx="414" cy="61" r="7" fill="#C8A24A"/>
+</svg>

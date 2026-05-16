@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">plotloop mark 05 - oo pivot</title>
+  <desc id="desc">Two lowercase o loops linked with a small pivot gap.</desc>
+  <rect width="256" height="256" rx="56" fill="#F6F1E7"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M91 82a46 46 0 1 0 34 77" stroke="#080A0F" stroke-width="18"/>
+    <path d="M165 174a46 46 0 1 0-34-77" stroke="#080A0F" stroke-width="18"/>
+    <path d="M118 128h20" stroke="#1E4FFF" stroke-width="18"/>
+  </g>
+  <circle cx="185" cy="76" r="10" fill="#C8A24A"/>
+</svg>

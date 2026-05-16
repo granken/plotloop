@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 640" role="img" aria-labelledby="title desc">
+  <title id="title">plotloop five-loop identity preview</title>
+  <desc id="desc">Preview sheet for the refined five-loop plotloop wordmark, compact glyph, and panda tilt mascot direction.</desc>
+  <rect width="1160" height="640" fill="#F6F1E7"/>
+  <g font-family="Inter, Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#080A0F">
+    <text x="48" y="62" font-size="28" font-weight="760">plotloop five-loop identity</text>
+    <text x="48" y="92" font-size="15" opacity="0.66">The word itself carries the system: p + o + o + o + p. One tiny break marks the pivot.</text>
+  </g>
+
+  <g transform="translate(48 136)">
+    <rect width="1064" height="182" rx="22" fill="#FFFFFF" stroke="#E1D9CA"/>
+    <image href="logo-wordmark-03-five-loops.svg" x="80" y="28" width="904" height="126"/>
+    <text x="532" y="160" text-anchor="middle" font-family="Inter, Geist, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="#080A0F">Primary wordmark: five counters, one pivot gap, no color dots</text>
+  </g>
+
+  <g transform="translate(48 374)">
+    <rect width="244" height="204" rx="18" fill="#FFFFFF" stroke="#E1D9CA"/>
+    <image href="logo-mark-07-five-loop-glyph.svg" x="76" y="28" width="92" height="92"/>
+    <text x="122" y="152" text-anchor="middle" font-family="Inter, Geist, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="#080A0F">System Glyph</text>
+    <text x="122" y="176" text-anchor="middle" font-family="Inter, Geist, ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#68645D">for favicon / product icon</text>
+  </g>
+
+  <g transform="translate(340 374)">
+    <rect width="244" height="204" rx="18" fill="#FFFFFF" stroke="#E1D9CA"/>
+    <image href="logo-mark-08-panda-tilt.svg" x="76" y="28" width="92" height="92"/>
+    <text x="122" y="152" text-anchor="middle" font-family="Inter, Geist, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="#080A0F">Panda Tilt</text>
+    <text x="122" y="176" text-anchor="middle" font-family="Inter, Geist, ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#68645D">for stickers / mascot moments</text>
+  </g>
+
+  <g transform="translate(664 400)" font-family="Inter, Geist, ui-sans-serif, system-ui, sans-serif" fill="#080A0F">
+    <text x="0" y="0" font-size="18" font-weight="760">Recommended system</text>
+    <text x="0" y="36" font-size="15" opacity="0.72">1. Main brand: wordmark only.</text>
+    <text x="0" y="66" font-size="15" opacity="0.72">2. Small app surfaces: five-loop glyph.</text>
+    <text x="0" y="96" font-size="15" opacity="0.72">3. Community warmth: panda tilt mascot, never the primary logo.</text>
+  </g>
+</svg>

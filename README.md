@@ -1,8 +1,11 @@
-# plotloop
+<p align="center">
+  <img src="./assets/logo.svg" alt="plotloop" width="575">
+</p>
 
-> **Designing loops to change how you evolve.**
->
-> *Plot your loop. One loop to rule them all.*
+<p align="center">
+  <strong>Designing loops to change how you evolve.</strong><br>
+  <em>Plot your loop.</em>
+</p>
 
 A workshop of **agents, skills, scripts and methodologies** for rewriting how we work — built around three convictions:
 
@@ -68,10 +71,6 @@ See [`PRINCIPLES.md`](./PRINCIPLES.md). The short version:
 ## Inspirations
 
 - **Boris Cherny** on agentic loops (the talk that put a name on what I was already doing)
-- **The Matrix** — "I'm trying to free your mind, Neo. But I can only show you the door."
-- **The Lord of the Rings** — *One loop to rule them all*
-- **Pied Piper** (HBO's *Silicon Valley*) — middle-out, with melody
-- *Friends* — **PIVOT!** is, in fact, the entire thesis
 
 See [`docs/inspirations/`](./docs/inspirations) for the running list.
 
