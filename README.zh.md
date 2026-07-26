@@ -41,6 +41,18 @@
 
 ---
 
+## 独立项目
+
+部分 PlotLoop artifact 会成长为拥有独立仓库和发布节奏的完整产品：
+
+### [PlotLoop Speaker Review](https://github.com/granken/plotloop-speaker-review)
+
+一个本地优先的会议文字稿说话人校对工作台，用于确认不确定的说话人标签、从适合触屏操作的联系人列表中纠正姓名，并导出可复用的 `speaker-review v2` 数据。
+
+[体验虚构数据演示版](https://granken.github.io/plotloop-speaker-review/) · [查看版本发布](https://github.com/granken/plotloop-speaker-review/releases)
+
+---
+
 ## Quickstart
 
 仓库的第一个 artifact 是 **`scripts/mimo-balance/`**——小米 MiMo 开放平台余额 & 账单查询工具（POSIX shell + curl + python3）。刻意做得很小，把仓库所有原则压进一个目录里。

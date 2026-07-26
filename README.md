@@ -41,6 +41,18 @@ Every subdirectory has its own README. Start anywhere.
 
 ---
 
+## Independent projects
+
+Some PlotLoop artifacts grow into standalone products with their own repositories and release cycles:
+
+### [PlotLoop Speaker Review](https://github.com/granken/plotloop-speaker-review)
+
+A local-first meeting transcript workbench for reviewing uncertain speaker labels, correcting names from a touch-friendly roster, and exporting reusable `speaker-review v2` data.
+
+[Try the fictional-data demo](https://granken.github.io/plotloop-speaker-review/) · [View releases](https://github.com/granken/plotloop-speaker-review/releases)
+
+---
+
 ## Quickstart
 
 The first artifact in this repo is **`scripts/mimo-balance/`** — a POSIX-shell + curl + python3 balance & billing checker for Xiaomi's MiMo open platform. Tiny on purpose: it embodies all the principles below.
