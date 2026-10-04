@@ -1,0 +1,7 @@
+_internal/
+node_modules/
+.env
+*.mp3
+*.mp4
+review/
+out/

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__ · 主持播放器</title>
+<style>
+:root{--bg:#f1f3f7;--panel:#fff;--panel2:#f5f7fb;--line:#d7dce7;--text:#141a28;--muted:#5d667a;--accent:#4766e8;--soft:#e3e9ff;--warn:#b97c06;--wsoft:#fff4dc}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0f1219;--panel:#171c27;--panel2:#1d2331;--line:#2c3448;--text:#e9edf5;--muted:#98a1b5;--accent:#7d95ff;--soft:#1f2a4d;--warn:#f2b84b;--wsoft:#2f2614}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0f1219;--panel:#171c27;--panel2:#1d2331;--line:#2c3448;--text:#e9edf5;--muted:#98a1b5;--accent:#7d95ff;--soft:#1f2a4d;--warn:#f2b84b;--wsoft:#2f2614}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;padding:18px 16px 28px}
+header{max-width:1400px;margin:0 auto}
+h1{font-size:20px;font-weight:800}
+.meta{margin-top:4px;font-size:14px;color:var(--muted)}
+.wrap{max-width:1400px;margin:14px auto 0;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px}
+.stage{position:relative;background:#000;border-radius:12px;overflow:hidden}
+video{width:100%;display:block;aspect-ratio:16/9}
+.banner{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);width:min(94%,620px);background:rgba(15,20,32,.95);border:2px solid #f2b84b;border-radius:12px;padding:14px 16px;color:#e9edf5}
+.banner b{color:#f2b84b;font-size:17px}.banner p{margin-top:6px;font-size:14px;line-height:1.6;color:#c4cbdb}
+.banner .row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.banner button{font:inherit;font-size:14px;border-radius:8px;padding:5px 12px;cursor:pointer;border:1px solid #3a4560;background:#1d2539;color:#e9edf5}
+.banner button.go{background:#f2b84b;border-color:#f2b84b;color:#1a1408;font-weight:700}
+.bar{position:relative;height:46px;margin-top:12px;cursor:pointer}
+.seg{position:absolute;top:10px;height:30px;border-radius:7px;background:var(--panel2);border:1px solid var(--line);overflow:hidden;font-size:13px;color:var(--muted);padding:6px 8px;white-space:nowrap}
+.seg .f{position:absolute;inset:0 auto 0 0;background:var(--soft);pointer-events:none}.seg span{position:relative}
+.seg.on{border-color:var(--accent);color:var(--text);font-weight:700}
+.tick{position:absolute;top:2px;width:4px;height:8px;border-radius:2px;background:var(--warn)}
+.head{position:absolute;top:0;width:2px;height:44px;background:var(--text);pointer-events:none}
+.ctl{display:flex;gap:12px;align-items:center;margin-top:10px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+.ctl button{font:inherit;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:14px;cursor:pointer}
+.ctl button.pri{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.ctl label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.ctl input{accent-color:var(--warn)}
+.now{font-variant-numeric:tabular-nums}
+.list{background:var(--panel);border:1px solid var(--line);border-radius:12px;max-height:calc(100vh - 100px);overflow:auto}
+.sec{padding:10px 14px 4px;font-size:13px;color:var(--accent);font-weight:700}
+.it{display:flex;gap:10px;padding:7px 14px;font-size:14px;cursor:pointer;align-items:baseline}
+.it:hover{background:var(--panel2)}.it.on{background:var(--soft);font-weight:700}
+.it .t{color:var(--muted);font-variant-numeric:tabular-nums;min-width:44px}.it .p{margin-left:auto;color:var(--warn);font-size:12px;white-space:nowrap}
+.err{margin-top:10px;color:var(--warn);font-size:14px}
+button:focus-visible,.it:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+footer{max-width:1400px;margin:16px auto 0;font-size:12px;color:var(--muted)}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}.list{max-height:none}}
+</style></head><body>
+<header><h1>__TITLE__ · 主持播放器</h1><div class="meta" id="meta"></div></header>
+<div class="wrap"><div>
+  <div class="stage">
+    <video id="v" src="__VIDEO__" preload="metadata" playsinline></video>
+    <div class="banner" id="ban" hidden role="status"><b id="bt"></b><p id="bp"></p>
+      <div class="row"><button class="go" id="go">讨论完了，继续 ▶</button><button id="again">重看这一项</button></div></div>
+  </div>
+  <div class="err" id="err" hidden>找不到视频文件 __VIDEO__：把本网页和视频放在同一个文件夹里再打开。</div>
+  <div class="bar" id="bar"></div>
+  <div class="ctl">
+    <button class="pri" id="play">▶ 播放</button>
+    <button id="prev">← 上一章</button><button id="next">下一章 →</button>
+    <label for="auto"><input type="checkbox" id="auto" checked>到暂停点自动停</label>
+    <span class="now" id="now"></span>
+  </div>
+  <div class="ctl"><span>空格 播放/暂停 · ← → 切换章节 · 点进度条或右侧列表跳转</span></div>
+</div><div class="list" id="list"></div></div>
+<footer>__BRAND__ · 视频和播放器是会议材料，不代表任何条目已实现或已验收。</footer>
+<script>
+const CH=/*__CHAPTERS__*/null;
+const $=id=>document.getElementById(id),v=$('v'),bar=$('bar'),list=$('list');
+const mmss=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const X=s=>s/CH.total*bar.clientWidth;
+$('meta').textContent=`${CH.sections.length} 个小节 · ${CH.pauses.length} 个暂停点${CH.minutes?` · 建议 ${CH.minutes} 分钟`:''} · 视频 ${mmss(CH.total)}`;
+v.addEventListener('error',()=>{$('err').hidden=false});
+try{const s=localStorage.getItem('alignHostAutoPause');if(s!==null)$('auto').checked=s==='1'}catch(e){}
+$('auto').addEventListener('change',()=>{try{localStorage.setItem('alignHostAutoPause',$('auto').checked?'1':'0')}catch(e){}});
+
+function drawBar(){bar.innerHTML='';
+  CH.sections.forEach(s=>{const d=document.createElement('div');d.className='seg';d.style.left=X(s.start)+1+'px';d.style.width=Math.max(0,X(s.end)-X(s.start)-2)+'px';d.innerHTML=`<div class="f"></div><span>${esc(s.label)}${s.minutes?' · '+s.minutes+'′':''}</span>`;bar.appendChild(d)});
+  CH.pauses.forEach(p=>{const t=document.createElement('div');t.className='tick';t.title=p.title;t.style.left=X(p.at)-2+'px';bar.appendChild(t)});
+  const h=document.createElement('div');h.className='head';h.id='head';bar.appendChild(h);paint()}
+bar.addEventListener('click',e=>{const r=bar.getBoundingClientRect();seek((e.clientX-r.left)/r.width*CH.total)});
+
+let lastSec='';
+CH.segments.forEach(g=>{
+  if(g.section!==lastSec){const s=CH.sections.find(x=>x.id===g.section);if(s){const h=document.createElement('div');h.className='sec';h.textContent=s.title||s.label;list.appendChild(h)}lastSec=g.section}
+  const it=document.createElement('div');it.className='it';it.tabIndex=0;it.dataset.start=g.start;
+  it.innerHTML=`<span class="t">${mmss(g.start)}</span><span>${esc(g.title)}</span>${g.minutes?`<span class="p">⏸ ${g.minutes}′</span>`:''}`;
+  it.onclick=()=>seek(g.start);it.onkeydown=e=>{if(e.key==='Enter')seek(g.start)};list.appendChild(it)});
+
+const done=new Set();let lastPause=null;
+function seek(t){v.currentTime=Math.max(0,Math.min(t,CH.total-0.1));CH.pauses.forEach(p=>{if(p.at<v.currentTime-0.2)done.add(p.id);else done.delete(p.id)});hide();v.play().catch(()=>{})}
+function cur(){let k=0;CH.segments.forEach((g,i)=>{if(v.currentTime>=g.start-0.05)k=i});return k}
+function hide(){$('ban').hidden=true}
+function paint(){const t=v.currentTime||0;const h=$('head');if(h)h.style.left=X(t)+'px';
+  bar.querySelectorAll('.seg').forEach((d,i)=>{const s=CH.sections[i];d.classList.toggle('on',t>=s.start&&t<s.end);d.firstChild.style.width=Math.max(0,Math.min(1,(t-s.start)/(s.end-s.start)))*100+'%'});
+  const k=cur();list.querySelectorAll('.it').forEach((n,i)=>n.classList.toggle('on',i===k));
+  $('now').textContent=`${mmss(t)} / ${mmss(CH.total)} · ${CH.segments[k].title}`;
+  $('play').textContent=v.paused?'▶ 播放':'❚❚ 暂停'}
+v.addEventListener('timeupdate',()=>{paint();if(!$('auto').checked)return;
+  for(const p of CH.pauses){if(!done.has(p.id)&&v.currentTime>=p.at&&v.currentTime<p.at+1.5){done.add(p.id);v.pause();lastPause=p;
+    const fill=tpl=>esc(tpl).replace(/\{id\}/g,esc(p.id));
+    $('bt').textContent=`⏸ 讨论：${p.title}${p.minutes?`（建议 ${p.minutes} 分钟）`:''}`;
+    $('bp').innerHTML=`已定：${fill(CH.phrase.decided)}<br>未定：${fill(CH.phrase.pending)}`;
+    $('ban').hidden=false;$('go').focus({preventScroll:true});break}}});
+['play','pause','seeked','loadedmetadata'].forEach(e=>v.addEventListener(e,paint));
+v.addEventListener('play',hide);
+v.addEventListener('click',()=>v.paused?v.play().catch(()=>{}):v.pause());
+$('play').onclick=()=>v.paused?v.play().catch(()=>{}):v.pause();
+$('go').onclick=()=>{hide();v.play().catch(()=>{})};
+$('again').onclick=()=>{if(!lastPause)return;const g=CH.segments.find(s=>s.id===lastPause.id);if(g){done.delete(lastPause.id);seek(g.start)}};
+$('prev').onclick=()=>{const k=cur();seek(CH.segments[Math.max(0,v.currentTime-CH.segments[k].start>2?k:k-1)].start)};
+$('next').onclick=()=>{const k=cur();seek(CH.segments[Math.min(CH.segments.length-1,k+1)].start)};
+document.addEventListener('keydown',e=>{if(e.target.closest('input,button,.it'))return;
+  if(e.code==='Space'){e.preventDefault();v.paused?v.play().catch(()=>{}):v.pause()}
+  if(e.code==='ArrowRight'){e.preventDefault();$('next').click()}if(e.code==='ArrowLeft'){e.preventDefault();$('prev').click()}});
+addEventListener('resize',drawBar);drawBar();
+</script></body></html>

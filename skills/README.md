@@ -19,6 +19,12 @@ A **skill** is a self-contained capability that an agent can pick up and use —
 3. **Idempotent by default.** Running a skill twice should never break anything.
 4. **Document the failure mode.** Each skill's README has a "When this skill is wrong for the job" section.
 
+## Available
+
+| Skill | What it does |
+|---|---|
+| [`plotloop-align-host`](./plotloop-align-host) | Turns a requirements-vs-dev disagreement list into a meeting-host video that pauses at each item, plus a web player and a post-meeting AI prompt (中文) |
+
 ## Coming soon
 
 - *[placeholder]* `loop-diagram` — generate the OBSERVE/DECIDE/ACT diagram from any agent file
