@@ -23,7 +23,7 @@
 
   if (G.kind === 'item') {
     const I = G.item, C = G.challenge;
-    const refs = I.refs ? [I.refs.req && `需求 ${I.refs.req}`, I.refs.dev && `研发 ${I.refs.dev}`].filter(Boolean).join(' · ') : '';
+    const refs = I.refs ? [I.refs.req, I.refs.dev].filter(Boolean).join(' · ') : '';  // refs 自带文档名，见 agenda-format.md
     anim.push([mk('ih', `<div class="sec">${esc(G.sectionInfo.title)}</div><div class="t"><span>${esc(I.id)}</span>${esc(I.title)}</div>
       <div class="chips">${I.nature ? `<span class="chip n">${esc(I.nature)}</span>` : ''}${C ? `<span class="chip g">挑战题 ${esc(C.id)}</span>` : ''}${G.minutes ? `<span class="chip m">建议讨论 ${G.minutes} 分钟</span>` : ''}${I.roles ? `<span class="chip">参与：${esc([].concat(I.roles).join(' / '))}</span>` : ''}${refs ? `<span class="chip">${esc(refs)}</span>` : ''}</div>`), 0.05]);
     const grid = mk('grid');
