@@ -84,18 +84,21 @@ node scripts/build.js analyze --project DIR   # silencedetect → script/timing.
 ### 5. 生成场景与时间轴
 
 ```bash
-node scripts/build.js scenes --project DIR     # 每段一个 HTML 场景（scenes/host.js 渲染）
+node scripts/build.js scenes --project DIR     # 每段一个 HTML 场景（scenes/host.js 渲染）；加 --4k 出 3840×2160
 node scripts/build.js timeline --project DIR   # 旁白混音 + 时间轴
 node scripts/build.js chapters --project DIR   # MP4 章节 + 播放器用的 out/chapters.json
 ```
 
+`--4k`：同一套 1920 布局按 2 倍像素密度渲染，文字原生重绘、不是放大；`timeline` / `final` 自动跟随（H.264 level 5.1，CRF 14）。渲染时间约为 1080p 的 4 倍，投屏用 1080p 就够，**对外发布（B 站等）再开**。
+
 ### 6. 草稿 → 终版
 
 ```bash
+node scripts/build.js layout --project DIR     # 自动排版检查：每段每 0.5s 查溢出、出框、出安全区、压字幕、互相重叠、孤字折行
 node scripts/build.js draft --project DIR      # 低帧率半分辨率，每段三帧拼成 review/<id>.png
 ```
 
-看拼图检查排版（溢出、遮挡、字太小），修好再：
+`layout` 不用渲染、几十秒出结果，有问题退出码 1、明细在 `reports/layout-check.json`；它查得到"撑破框"，查不出"难看"，**拼图仍要逐张看**。都没问题再：
 
 ```bash
 node scripts/build.js final --project DIR      # 后台独立进程全量渲染，完成写 out/.final.done
@@ -125,6 +128,12 @@ node scripts/build.js prompt --project DIR     # → out/post-meeting.md
 ### 9. 可选：对外分享物料
 
 脱敏后做 20 秒演示、3:4 图文、9:16 竖版、公开部署。见 `references/share-kit.md`。
+
+```bash
+node scripts/build.js still A03 --at 12 --out out/A03.png --project DIR   # 干净静帧（去字幕和进度条），配图/封面素材；加 --4k 出 3840×2160
+```
+
+公开部署到 Cloudflare Pages 时，**单个文件上限 25MB**：先把成片重压（幻灯片式画面用 `-crf 28 -tune stillimage` 通常能压到 1/3 且文字清晰），并配上 `templates/pages-range-middleware.js`。
 
 ## 交付清单
 

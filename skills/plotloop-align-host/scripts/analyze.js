@@ -45,7 +45,13 @@ function analyzeOne(row, file) {
   const speechEnd = sil.length && sil[sil.length - 1].end > dur - 0.05 ? sil[sil.length - 1].start : dur;
   const inner = sil.filter((x) => x.start > speechStart + 0.05 && x.end < speechEnd - 0.05);
   const us = units(row.text);
-  const weight = (u) => [...u.replace(/[，。！？；：、]/g, '')].length;
+  // 估时权重：汉字按字计，英文按词计（TTS 念一个英文词约等于 1.5 个汉字），否则长英文名会把后一句的字幕挤掉
+  const weight = (u) => {
+    const words = (u.match(/[A-Za-z][A-Za-z.'-]*/g) || []).length;
+    const digits = (u.match(/\d+(\.\d+)?/g) || []).length;
+    const cjk = [...u.replace(/[A-Za-z][A-Za-z.'-]*|\d+(\.\d+)?|[\s，。！？；：、]/g, '')].length;
+    return cjk + words * 1.5 + digits * 1.5;
+  };
   const total = us.reduce((a, u) => a + weight(u), 0) || 1;
   const used = new Set();
   const bounds = [];

@@ -13,7 +13,9 @@ const STEPS = {
   check:    '校验 agenda.json + 旁白与清单是否对得上（配音前必跑）',
   tts:      '逐行配音；文本没变的跳过。--tts volc|listenhub|file  [--voice 音色名]',
   analyze:  '测每段旁白的时长和句间停顿 → script/timing.json',
-  scenes:   '生成每段的 HTML 场景 + 渲染清单（全量 / 草稿）',
+  scenes:   '生成每段的 HTML 场景 + 渲染清单（全量 / 草稿）；--4k 按 2 倍像素出 3840×2160，后续 timeline / final 自动跟随',
+  layout:   '排版检查：每段每 0.5s 查溢出、出框、出安全区、压字幕、互相重叠、孤字折行 → reports/layout-check.json',
+  still:    '导出一帧干净静帧（去字幕和进度条）：still <段id> [--at 秒] [--out 文件.png] [--4k]',
   draft:    '低帧率半分辨率渲染，每段抽 3 帧拼成 review/<id>.png',
   timeline: '旁白混音 + qiaomu-cut 时间轴 timeline.json',
   chapters: 'MP4 章节 + out/chapters.json（小节、暂停点）',
@@ -100,7 +102,8 @@ function tts(root, argv) {
 
 // ---------- scenes ----------
 
-function scenes(root) {
+function scenes(root, argv = []) {
+  const uhd = argv.includes('--4k');
   const P = L.plan(root);
   const { agenda, segs, total, sections, pauses } = P;
   const { items, challenges, challengeOf } = L.lookup(agenda);
@@ -123,15 +126,17 @@ function scenes(root) {
     fs.writeFileSync(path.join(root, 'scenes/data', `${g.id}.js`), `window.SEG=${JSON.stringify(data)};\n`);
     fs.writeFileSync(path.join(root, 'scenes', `${g.id}.html`), `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"></head><body>\n<script src="data/${g.id}.js"></script><script src="host.js"></script></body></html>\n`);
   }
+  // 4K：同一套 1920 布局按 2 倍像素密度渲染（文字原生重绘，不是放大），场景另存 assets/scenes-4k
   const spec = (draft) => ({ scenes: segs.map((g) => ({
-    source: `scenes/${g.id}.html`, engine: 'html', output: `assets/${draft ? 'draft' : 'scenes'}/${g.id}.mp4`,
-    width: L.W, height: L.H, fps: draft ? 2 : L.FPS, duration: g.duration, force: true, ...(draft ? { scale: 0.5 } : {})
+    source: `scenes/${g.id}.html`, engine: 'html', output: `assets/${draft ? 'draft' : uhd ? 'scenes-4k' : 'scenes'}/${g.id}.mp4`,
+    width: L.W, height: L.H, fps: draft ? 2 : L.FPS, duration: g.duration, force: true, ...(draft ? { scale: 0.5 } : uhd ? { scale: 2 } : {})
   })) });
+  L.writeJSON(path.join(root, 'build/output.json'), { uhd });
   L.writeJSON(path.join(root, 'scenes-batch.json'), spec(false));
   L.writeJSON(path.join(root, 'scenes-batch-draft.json'), spec(true));
   L.writeJSON(path.join(root, 'reports/agenda-plan.json'), timeline);
   const mm = (s) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
-  console.log(`场景 ${segs.length} 段，全片 ${mm(total)}，暂停点 ${pauses.length} 个`);
+  console.log(`场景 ${segs.length} 段，全片 ${mm(total)}，暂停点 ${pauses.length} 个${uhd ? '（4K）' : ''}`);
   for (const s of sections) console.log(`  ${s.label.padEnd(10)} ${mm(s.end - s.start)}`);
 }
 
@@ -181,17 +186,21 @@ function timelineStep(root) {
   const provider = L.readJSON(path.join(root, 'script/tts', `${segs[0].id}.meta.json`)).provider;
   const imp = JSON.parse(L.qcut(['ingest', root, mixed, '--kind', 'audio', '--provider', provider, '--json']));
   const asset = imp.asset || imp;
+  const outFile = path.join(root, 'build/output.json');
+  const uhd = fs.existsSync(outFile) && L.readJSON(outFile).uhd === true;
+  // H.264 level 4.2 只到 1080p，4K 必须 5.1；码率顺带提高（CRF 14）
+  const res = uhd ? { width: L.W * 2, height: L.H * 2, level: '5.1', crf: 14, intermediateCrf: 14 } : { width: L.W, height: L.H };
   const timeline = {
     schema: 'qiaocut.timeline.v1',
     title: `${agenda.meeting.title} ${agenda.meeting.version || ''}`.trim(),
-    output: { width: L.W, height: L.H, fps: L.FPS, duration: total, loudnessLufs: -16, truePeakDb: -1.5, file: 'renders/final.mp4' },
+    output: { ...res, fps: L.FPS, duration: total, loudnessLufs: -16, truePeakDb: -1.5, file: 'renders/final.mp4' },
     narration: { engine: 'file', path: imp.localPath || asset.localPath, provider, assetId: asset.id, start: 0, trim: 0, gain: 1 },
     music: false,
-    shots: segs.map((g) => ({ id: g.id, kind: 'video', path: `assets/scenes/${g.id}.mp4`, duration: g.duration, fit: 'cover' }))
+    shots: segs.map((g) => ({ id: g.id, kind: 'video', path: `assets/${uhd ? 'scenes-4k' : 'scenes'}/${g.id}.mp4`, duration: g.duration, fit: 'cover' }))
   };
   L.writeJSON(path.join(root, 'timeline.json'), timeline);
   L.writeJSON(path.join(root, 'reports/narration-placement.json'), { total, placements: segs.map((g) => ({ id: g.id, at: L.round(g.start + L.LEAD), duration: g.audioDuration })) });
-  console.log(`时间轴 ${segs.length} 段，${total.toFixed(1)}s`);
+  console.log(`时间轴 ${segs.length} 段，${total.toFixed(1)}s，${res.width}×${res.height}`);
 }
 
 function chapters(root) {
@@ -338,19 +347,21 @@ function main(argv) {
   const root = L.projectDir(argv);
   const map = {
     init: () => init(root, argv), check: () => check(root), tts: () => tts(root, argv),
-    analyze: () => require('./analyze').main(argv), scenes: () => scenes(root), draft: () => draft(root),
+    analyze: () => require('./analyze').main(argv), scenes: () => scenes(root, argv), draft: () => draft(root),
+    layout: () => require('./inspect').layout(root, argv), still: () => require('./inspect').still(root, argv),
     timeline: () => timelineStep(root), chapters: () => chapters(root), final: () => final(root, argv),
     _final: () => finalWorker(root), verify: () => verify(root), player: () => player(root), prompt: () => prompt(root),
-    all: () => { check(root); tts(root, argv); require('./analyze').main(argv); scenes(root); timelineStep(root); chapters(root); player(root); prompt(root); }
+    all: () => { check(root); tts(root, argv); require('./analyze').main(argv); scenes(root, argv); timelineStep(root); chapters(root); player(root); prompt(root); }
   };
   if (!map[step]) {
     console.log('用法：node scripts/build.js <step> [--project DIR]\n');
     for (const [k, v] of Object.entries(STEPS)) console.log(`  ${k.padEnd(9)} ${v}`);
     process.exit(step ? 2 : 0);
   }
-  map[step]();
+  return map[step]();
 }
 
 if (require.main === module) {
-  try { main(process.argv.slice(2)); } catch (e) { console.error(`✗ ${e.message}`); process.exit(1); }
+  const fail = (e) => { console.error(`✗ ${e.message}`); process.exit(1); };
+  try { Promise.resolve(main(process.argv.slice(2))).catch(fail); } catch (e) { fail(e); }
 }

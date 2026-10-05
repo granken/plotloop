@@ -38,6 +38,8 @@ node $S/scripts/build.js final --project $P     # 后台渲染，完成后写 $P
 node $S/scripts/build.js verify --project $P
 ```
 
+要发 B 站等平台的高清版：`scenes --4k` 之后照常 `timeline` → `final`，出 3840×2160。改过排版先跑 `layout` 自动检查，再看 `draft` 拼图。
+
 没有配音账号也能先跑通：订餐示例用 macOS 自带的中文语音生成音频，再用 `--tts file` 导入（音质一般，只用来试流程）：
 
 ```bash
@@ -86,6 +88,7 @@ examples/
   showcase.ride-hailing.lines.tsv  展示示例的旁白
 scripts/
   validate_agenda.js        清单校验 ✅
+  inspect.js                排版检查 + 静帧导出 ✅
   build.js                  构建流水线 ✅
   analyze.js                旁白停顿测量 ✅
   lib.js                    共用：路径、工具、分段计划
