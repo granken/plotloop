@@ -39,7 +39,10 @@ function qcutPath() {
   const candidates = [
     process.env.QCUT,
     path.join(os.homedir(), '.claude/skills/qiaomu-cut/scripts/qcut.js'),
-    path.join(os.homedir(), '.agents/skills/qiaomu-cut/scripts/qcut.js')
+    path.join(os.homedir(), '.agents/skills/qiaomu-cut/scripts/qcut.js'),
+    // plotloop-video-cut: plotloop's modified fork of qiaomu-cut (same CLI)
+    path.join(os.homedir(), '.claude/skills/plotloop-video-cut/scripts/qcut.js'),
+    path.join(os.homedir(), '.agents/skills/plotloop-video-cut/scripts/qcut.js')
   ].filter(Boolean);
   const hit = candidates.find((p) => fs.existsSync(p));
   if (!hit) throw new Error('找不到 qiaomu-cut：先安装 https://github.com/joeseesun/qiaomu-cut-skill，或设置 QCUT=/path/to/qcut.js');
