@@ -7,6 +7,8 @@ description: plotloop 对齐会主持人。把一份"需求方 vs 研发"的分�
 
 让一段视频主持需求对齐会。视频负责节奏和不漏项，人负责做决定，录音负责留证据。
 
+> 本文出现的 `references/`、`examples/`、`scripts/` 都相对**本 skill 目录**（plotloop-align-host），不是渲染工程目录，也不是 qiaomu-cut / plotloop-video-cut 的目录。
+
 > 方法背景、为什么这样做、实战数据：见 `references/method.md`。第一次用先读它。
 
 ## 什么时候用

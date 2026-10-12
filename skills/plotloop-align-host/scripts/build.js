@@ -37,7 +37,7 @@ function init(root, argv) {
   }
   for (const d of ['script/tts', 'scenes/data', 'assets/scenes', 'out', 'review', 'reports']) fs.mkdirSync(path.join(root, d), { recursive: true });
   if (agendaSrc) fs.copyFileSync(path.resolve(agendaSrc), path.join(root, 'agenda.json'));
-  console.log(`工程就绪：${root}\n下一步：写 script/lines.tsv（见 references/narration-guide.md），然后 build.js check`);
+  console.log(`工程就绪：${root}\n下一步：写 script/lines.tsv（见 ${L.ref('narration-guide.md')}），然后 build.js check`);
 }
 
 function check(root) {

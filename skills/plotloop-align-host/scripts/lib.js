@@ -9,6 +9,9 @@ const crypto = require('crypto');
 const { spawnSync } = require('child_process');
 
 const SKILL = path.resolve(__dirname, '..');
+// Absolute path to a skill doc: errors are read from inside the render project, where a bare
+// `references/x.md` points at the wrong skill (reported 10-12: agents looked in plotloop-video-cut).
+const ref = (name) => path.join(SKILL, 'references', name);
 const BRAND = 'plotloop · align-host';
 const W = 1920, H = 1080, FPS = 10;
 const LEAD = 0.5, PAUSE_HOLD = 4.5, TAIL = 0.6, SECTION_TAIL = 1.0, CLOSE_TAIL = 5;
@@ -76,14 +79,14 @@ const writeJSON = (p, v) => { fs.mkdirSync(path.dirname(p), { recursive: true })
 
 function loadAgenda(root) {
   const p = path.join(root, 'agenda.json');
-  if (!fs.existsSync(p)) throw new Error(`没有 ${p}：先写 agenda.json（见 references/agenda-format.md）`);
+  if (!fs.existsSync(p)) throw new Error(`没有 ${p}：先写 agenda.json（格式见 ${ref('agenda-format.md')}）`);
   return readJSON(p);
 }
 
 // lines.tsv: id<TAB>kind<TAB>section<TAB>minutes<TAB>text
 function loadLines(root) {
   const p = path.join(root, 'script/lines.tsv');
-  if (!fs.existsSync(p)) throw new Error(`没有 ${p}：先按 references/narration-guide.md 写旁白`);
+  if (!fs.existsSync(p)) throw new Error(`没有 ${p}：先按 ${ref('narration-guide.md')} 写旁白`);
   const rows = fs.readFileSync(p, 'utf8').split('\n').map((l) => l.replace(/\r$/, '')).filter((l) => l.trim() && !l.startsWith('#'));
   const seen = new Set();
   return rows.map((l, n) => {
@@ -182,6 +185,7 @@ function plan(root) {
 }
 
 module.exports = {
+  ref,
   SKILL, BRAND, W, H, FPS, LEAD, PAUSE_KINDS, KINDS, round,
   projectDir, flag, tool, qcutPath, run, audioDuration, qcut, sha, readJSON, writeJSON,
   loadAgenda, loadLines, loadTiming, barSections, lookup, label, checkLines, plan
